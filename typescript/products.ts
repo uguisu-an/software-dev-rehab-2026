@@ -10,6 +10,6 @@ const products = [
   { id: 3, name: "タブレット", price: 60000 },
 ];
 
-products.forEach(({ name, price }) => {
+for (const { name, price } of products) {
   console.log(`商品名: ${name} / 価格: ${price}円`);
-});
+}
