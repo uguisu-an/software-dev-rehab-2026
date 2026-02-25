@@ -11,6 +11,13 @@ export function fetchUserName(id: number): Promise<string> {
   });
 }
 
+export function toError(e: unknown): Error {
+  if (e instanceof Error) {
+    return e;
+  }
+  return new Error(String(e));
+}
+
 async function main() {
   const userIds = [1, 2, 3, -1, 4]; // -1は無効なID
   for (const userId of userIds) {
@@ -18,7 +25,7 @@ async function main() {
       const userName = await fetchUserName(userId);
       console.log(userName);
     } catch (error) {
-      console.error("Error:", (error as Error).message);
+      console.error("Error:", toError(error).message);
     }
   }
 }
