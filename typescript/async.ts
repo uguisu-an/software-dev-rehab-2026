@@ -14,11 +14,12 @@ export function fetchUserName(id: number): Promise<string> {
 async function main() {
   const userIds = [1, 2, 3, -1, 4]; // -1は無効なID
   for (const userId of userIds) {
-    await fetchUserName(userId)
-      .then((userName) => console.log(userName))
-      .catch((error: Error) => {
-        console.error("Error:", error.message);
-      });
+    try {
+      const userName = await fetchUserName(userId);
+      console.log(userName);
+    } catch (error) {
+      console.error("Error:", (error as Error).message);
+    }
   }
 }
 
